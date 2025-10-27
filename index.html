@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Colin's School Rush</title>
+    <title>Help Colin - School Adventure Game</title>
     <style>
       * {
         margin: 0;
@@ -13,63 +13,156 @@
 
       body {
         font-family: "Comic Sans MS", cursive, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
         overflow: hidden;
-        position: relative;
+        height: 100vh;
+        background: linear-gradient(135deg, #87ceeb 0%, #98fb98 100%);
       }
 
-      .background-image {
-        position: fixed;
-        top: 0;
-        left: 0;
+      .game-container {
+        position: relative;
         width: 100%;
-        height: 100%;
-        background-image: url("room.jpg");
+        height: 100vh;
+        background-image: url("room.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        z-index: -1;
-        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
       }
 
-      .overlay {
-        position: fixed;
+      .colin-section {
+        flex: 0 0 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .colin-image {
+        width: 200px;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: bounce 2s infinite ease-in-out;
+      }
+
+      .story-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 30px;
+        margin: 0 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .game-title {
+        font-size: 3.5rem;
+        color: #ff6b6b;
+        text-shadow: 3px 3px 0px #ffd93d, 6px 6px 0px #6bcf7f;
+        margin-bottom: 20px;
+        animation: titleGlow 3s infinite alternate;
+      }
+
+      .story-text {
+        font-size: 1.4rem;
+        color: #4a4a4a;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        max-width: 600px;
+      }
+
+      .help-button {
+        background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4);
+        background-size: 300% 300%;
+        border: none;
+        border-radius: 50px;
+        padding: 20px 50px;
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        animation: buttonPulse 2s infinite, gradientShift 4s infinite;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+      }
+
+      .help-button:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .help-button:active {
+        transform: translateY(-2px) scale(1.02);
+      }
+
+      .floating-emojis {
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.3);
-        z-index: -1;
+        pointer-events: none;
+        z-index: 1;
       }
 
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 100vh;
-        padding: 2rem;
-        max-width: 1400px;
-        margin: 0 auto;
+      .emoji {
+        position: absolute;
+        font-size: 2rem;
+        animation: float 6s infinite ease-in-out;
+        opacity: 0.7;
       }
 
-      .left-section {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
+      .emoji:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
       }
-
-      .colin-image {
-        max-width: 400px;
-        max-height: 500px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        animation: bounce 2s ease-in-out infinite;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 3px solid rgba(255, 255, 255, 0.2);
+      .emoji:nth-child(2) {
+        top: 20%;
+        right: 15%;
+        animation-delay: 1s;
+      }
+      .emoji:nth-child(3) {
+        top: 60%;
+        left: 5%;
+        animation-delay: 2s;
+      }
+      .emoji:nth-child(4) {
+        top: 70%;
+        right: 10%;
+        animation-delay: 3s;
+      }
+      .emoji:nth-child(5) {
+        top: 30%;
+        left: 50%;
+        animation-delay: 4s;
+      }
+      .emoji:nth-child(6) {
+        top: 80%;
+        left: 30%;
+        animation-delay: 5s;
+      }
+      .emoji:nth-child(7) {
+        top: 15%;
+        left: 70%;
+        animation-delay: 1.5s;
+      }
+      .emoji:nth-child(8) {
+        top: 50%;
+        right: 5%;
+        animation-delay: 2.5s;
       }
 
       @keyframes bounce {
@@ -81,135 +174,43 @@
           transform: translateY(0);
         }
         40% {
-          transform: translateY(-10px);
+          transform: translateY(-20px);
         }
         60% {
-          transform: translateY(-5px);
+          transform: translateY(-10px);
         }
       }
 
-      .right-section {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 2rem;
-        color: white;
-      }
-
-      .game-title {
-        font-size: 3.5rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: glow 2s ease-in-out infinite alternate;
-      }
-
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+      @keyframes titleGlow {
+        0% {
+          text-shadow: 3px 3px 0px #ffd93d, 6px 6px 0px #6bcf7f;
         }
-        to {
-          text-shadow: 0 0 30px rgba(78, 205, 196, 0.8);
+        100% {
+          text-shadow: 3px 3px 0px #ffd93d, 6px 6px 0px #6bcf7f,
+            0 0 20px #ff6b6b;
         }
       }
 
-      .story-text {
-        font-size: 1.4rem;
-        line-height: 1.8;
-        margin-bottom: 2rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        background: rgba(0, 0, 0, 0.4);
-        padding: 2rem;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.1);
+      @keyframes buttonPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
       }
 
-      .help-button {
-        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-        color: white;
-        border: none;
-        padding: 1.5rem 3rem;
-        font-size: 1.5rem;
-        font-weight: bold;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .help-button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
-        background: linear-gradient(45deg, #ee5a24, #ff6b6b);
-      }
-
-      .help-button:active {
-        transform: translateY(-2px);
-      }
-
-      .help-button::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: left 0.5s;
-      }
-
-      .help-button:hover::before {
-        left: 100%;
-      }
-
-      .floating-elements {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      .floating-element {
-        position: absolute;
-        opacity: 0.1;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .floating-element:nth-child(1) {
-        top: 10%;
-        left: 10%;
-        animation-delay: 0s;
-      }
-
-      .floating-element:nth-child(2) {
-        top: 20%;
-        right: 15%;
-        animation-delay: 2s;
-      }
-
-      .floating-element:nth-child(3) {
-        bottom: 30%;
-        left: 20%;
-        animation-delay: 4s;
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       @keyframes float {
@@ -217,15 +218,37 @@
         100% {
           transform: translateY(0px) rotate(0deg);
         }
+        25% {
+          transform: translateY(-20px) rotate(5deg);
+        }
         50% {
-          transform: translateY(-20px) rotate(180deg);
+          transform: translateY(-10px) rotate(-5deg);
+        }
+        75% {
+          transform: translateY(-15px) rotate(3deg);
         }
       }
 
+      /* Mobile Responsive */
       @media (max-width: 768px) {
-        .container {
+        .game-container {
           flex-direction: column;
-          text-align: center;
+          padding: 10px;
+        }
+
+        .colin-section {
+          flex: 0 0 auto;
+          margin-bottom: 20px;
+        }
+
+        .colin-image {
+          width: 150px;
+        }
+
+        .story-section {
+          flex: 1;
+          margin: 0;
+          padding: 20px;
         }
 
         .game-title {
@@ -236,52 +259,99 @@
           font-size: 1.2rem;
         }
 
+        .help-button {
+          font-size: 1.5rem;
+          padding: 15px 40px;
+        }
+
+        .emoji {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .game-title {
+          font-size: 2rem;
+        }
+
+        .story-text {
+          font-size: 1rem;
+        }
+
+        .help-button {
+          font-size: 1.3rem;
+          padding: 12px 30px;
+        }
+
         .colin-image {
-          max-width: 300px;
-          margin-bottom: 2rem;
+          width: 120px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="background-image"></div>
-    <div class="overlay"></div>
+    <div class="game-container">
+      <div class="floating-emojis">
+        <div class="emoji">🎒</div>
+        <div class="emoji">📚</div>
+        <div class="emoji">✏️</div>
+        <div class="emoji">📝</div>
+        <div class="emoji">🎨</div>
+        <div class="emoji">📏</div>
+        <div class="emoji">🔍</div>
+        <div class="emoji">📖</div>
+      </div>
 
-    <div class="floating-elements">
-      <div class="floating-element">📚</div>
-      <div class="floating-element">✏️</div>
-      <div class="floating-element">🎒</div>
-      <div class="floating-element">📝</div>
-      <div class="floating-element">🔍</div>
-      <div class="floating-element">📖</div>
-    </div>
-
-    <div class="container">
-      <div class="left-section">
+      <div class="colin-section">
         <img src="colin.png" alt="Colin" class="colin-image" />
       </div>
 
-      <div class="right-section">
-        <h1 class="game-title">Colin's School Rush</h1>
-
-        <div class="story-text">
-          <p><strong>Colin overslept! 😴</strong></p>
-          <p>
-            Help him grab his school supplies before the bus arrives! The clock
-            is ticking and Colin needs your help to collect his backpack, books,
-            pencils, and everything else he needs for school.
-          </p>
-          <p>
-            But be careful - time is running out and the school bus won't wait
-            forever! Can you help Colin make it to school on time?
-          </p>
-          <p>🎒 📚 ✏️ 📝 🕐</p>
-        </div>
-
-        <button class="help-button" onclick="window.location.href='game.html'">
-          Help Colin! 🚀
-        </button>
+      <div class="story-section">
+        <h1 class="game-title">Help Colin!</h1>
+        <p class="story-text">
+          Oh no! Colin overslept and the school bus is coming in just a few
+          minutes! He needs to quickly collect all his school supplies scattered
+          around his room before the bus arrives. Can you help him catch the
+          good items and avoid the distractions? Time is running out! 🏃‍♂️⏰
+        </p>
+        <button class="help-button" onclick="startGame()">Help Colin!</button>
       </div>
     </div>
+
+    <script>
+      function startGame() {
+        // Add a fun button click effect
+        const button = document.querySelector(".help-button");
+        button.style.transform = "scale(0.95)";
+        button.innerHTML = "Loading...";
+
+        // Navigate to game screen
+        setTimeout(() => {
+          window.location.href = "game.html";
+        }, 1000);
+      }
+
+      // Add some interactive sparkle effects when hovering over elements
+      document.addEventListener("DOMContentLoaded", function () {
+        const colinImage = document.querySelector(".colin-image");
+        const title = document.querySelector(".game-title");
+
+        colinImage.addEventListener("mouseenter", function () {
+          this.style.filter = "brightness(1.2) saturate(1.3)";
+        });
+
+        colinImage.addEventListener("mouseleave", function () {
+          this.style.filter = "brightness(1) saturate(1)";
+        });
+
+        title.addEventListener("mouseenter", function () {
+          this.style.animation = "titleGlow 0.5s infinite alternate";
+        });
+
+        title.addEventListener("mouseleave", function () {
+          this.style.animation = "titleGlow 3s infinite alternate";
+        });
+      });
+    </script>
   </body>
 </html>
